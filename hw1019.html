@@ -120,7 +120,7 @@ function people(){
 	
 	var tex = loader.load("./5222.png");
 	var texture = new THREE.Mesh(new THREE.PlaneGeometry(19,42), new THREE.MeshBasicMaterial({map : tex, transparent: true, side:THREE.DoubleSide}));
-	texture.position.set(10.7,29.5,-1.6);
+	texture.position.set(10.7,29.5,1.6);
 	
 	frame.add(foot,foot2,ffoot,ffoot2,body,head,hand,hand2,texture);
 }
