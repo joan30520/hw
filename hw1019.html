@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html>
+<head>
+<style>
+#heading{
+ position:absolute;
+ text-align:center;
+ width:100vw;
+}
+</style>
+</head>
+<body> 
+<script src="https://threejs.org/build/three.min.js"></script>
+<script src="https://threejs.org/examples/js/controls/OrbitControls.js"></script> 
+<script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
+<div id='heading'>
+ <h1 style ='color:pink'>My First 3JS</h1>
+  <button id='toggle'> Press </button>
+</div>
+
+<script>
+$('#toggle').click(function(){
+ turn = ! turn;
+ 
+ if(turn)
+	$('#toggle').text ('stop');
+ else
+    $('#toggle').text ('turn');
+});
+
+var renderer,camera,scene;
+var axes,frame;
+var angle = 0;
+var turn = false;
+
+init();
+animate();
+
+function init(){
+	renderer = new THREE.WebGLRenderer({antialias: true});
+	renderer.setSize(window.innerWidth,window.innerHeight);
+	renderer.setClearColor(0x888888);
+	document.body.appendChild(renderer.domElement);
+	
+	camera = new THREE.PerspectiveCamera(50, window.innerWidth / window.innerHeight, 1, 1000);
+	camera.position.z = 50;
+	
+	var controls = new THREE.OrbitControls(camera, renderer.domElement);
+	
+	scene = new THREE.Scene();
+	var grid=new THREE.GridHelper(100,10,'red','white');
+	scene.add(grid);
+	axes=new THREE.AxesHelper(15);
+	scene.add(axes);
+	
+	
+	frame = new THREE.Object3D();
+	scene.add(frame);
+	car();
+	people();
+	
+	
+
+}
+function car(){
+	var geometry=new THREE.BoxGeometry(15,3,8);
+	var material=new THREE.MeshNormalMaterial();
+	var box =new THREE.Mesh(geometry,material);
+	box.position.set(10,6,0);
+	
+	var geometryl=new THREE.CylinderGeometry(2.5,2.5,2,64);
+	var cylinder=new THREE.Mesh(geometryl,material);
+	var cylinder2=cylinder.clone();
+	cylinder.position.set(4,2,0);
+	cylinder2.position.set(16,2,0);
+	
+	cylinder.rotation.z = Math.PI/2;
+	cylinder2.rotation.z = Math.PI/2;
+	
+
+	frame.add(box,cylinder,cylinder2); 
+	
+}
+function people(){
+	//腳底
+	var fgeometry=new THREE.BoxGeometry(4.5,2,3);
+	var material=new THREE.MeshNormalMaterial();
+	var foot =new THREE.Mesh(fgeometry,material);
+	var foot2=foot.clone();
+	foot.position.set(8.4,8.5,0);
+	foot2.position.set(13,8.5,0);
+	
+	//腳
+	var ffgeometry=new THREE.BoxGeometry(4.5,19,3);
+	var ffoot =new THREE.Mesh(ffgeometry,material);
+	var ffoot2=ffoot.clone();
+	ffoot.position.set(8.4,19,0);
+	ffoot2.position.set(13,19,0);
+
+
+	//身體
+	var bgeometry=new THREE.BoxGeometry(9.1,12,3);
+	var body =new THREE.Mesh(bgeometry,material);
+	body.position.set(10.7,34.5,0);
+	
+	//頭
+	var hgeometry=new THREE.BoxGeometry(9,9,3);
+	var head =new THREE.Mesh(hgeometry,material);
+	head.position.set(10.7,45,0);
+	
+	//手
+	var hageometry=new THREE.BoxGeometry(5,12,3);
+	var hand =new THREE.Mesh(hageometry,material);
+	var hand2=hand.clone();
+	hand.position.set(3.7,34.5,0);
+	hand2.position.set(17.7,34.5,0);
+	
+	var loader = new THREE.TextureLoader();
+	loader.crossOrigin = '';
+	
+	var tex = loader.load("./na.jpg");
+	var texture = new THREE.Mesh(new THREE.PlaneGeometry(100,100), new THREE.MeshBasicMaterial({map : tex, transparent: true, side:THREE.DoubleSide}));
+	texture.position.set(50,50,50);
+	
+	frame.add(foot,foot2,ffoot,ffoot2,body,head,hand,hand2,texture);
+}
+
+function animate(){
+	if (turn)angle += 0.01;
+	frame.position.set(35*Math.cos(angle),0,-35*Math.sin(angle));
+	frame.rotation.y=angle;
+	renderer.render (scene,camera);
+	requestAnimationFrame(animate);
+}
+
+	
+</script>
+</body>
+</html>
