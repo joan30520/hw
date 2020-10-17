@@ -87,40 +87,40 @@ function people(){
 	var material=new THREE.MeshNormalMaterial();
 	var foot =new THREE.Mesh(fgeometry,material);
 	var foot2=foot.clone();
-	foot.position.set(8.4,8.5,0);
+	foot.position.set(8.5,8.5,0);
 	foot2.position.set(13,8.5,0);
 	
 	//腳
-	var ffgeometry=new THREE.BoxGeometry(4.5,19,3);
+	var ffgeometry=new THREE.BoxGeometry(4.9,19,3);
 	var ffoot =new THREE.Mesh(ffgeometry,material);
 	var ffoot2=ffoot.clone();
-	ffoot.position.set(8.4,19,0);
+	ffoot.position.set(8.5,19,0);
 	ffoot2.position.set(13,19,0);
 
 
 	//身體
-	var bgeometry=new THREE.BoxGeometry(9.1,12,3);
+	var bgeometry=new THREE.BoxGeometry(10,12,3);
 	var body =new THREE.Mesh(bgeometry,material);
 	body.position.set(10.7,34.5,0);
 	
 	//頭
-	var hgeometry=new THREE.BoxGeometry(9,9,3);
+	var hgeometry=new THREE.BoxGeometry(10,9,3);
 	var head =new THREE.Mesh(hgeometry,material);
-	head.position.set(10.7,45,0);
+	head.position.set(10.8,45,0);
 	
 	//手
-	var hageometry=new THREE.BoxGeometry(5,12,3);
+	var hageometry=new THREE.BoxGeometry(5,16,3);
 	var hand =new THREE.Mesh(hageometry,material);
 	var hand2=hand.clone();
-	hand.position.set(3.7,34.5,0);
-	hand2.position.set(17.7,34.5,0);
+	hand.position.set(3.7,31,0);
+	hand2.position.set(17.7,31,0);
 	
 	var loader = new THREE.TextureLoader();
 	loader.crossOrigin = '';
 	
-	var tex = loader.load("./na.jpg");
-	var texture = new THREE.Mesh(new THREE.PlaneGeometry(100,100), new THREE.MeshBasicMaterial({map : tex, transparent: true, side:THREE.DoubleSide}));
-	texture.position.set(50,50,50);
+	var tex = loader.load("./5222.png");
+	var texture = new THREE.Mesh(new THREE.PlaneGeometry(19,42), new THREE.MeshBasicMaterial({map : tex, transparent: true, side:THREE.DoubleSide}));
+	texture.position.set(10.7,28.5,1.6);
 	
 	frame.add(foot,foot2,ffoot,ffoot2,body,head,hand,hand2,texture);
 }
