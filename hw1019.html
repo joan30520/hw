@@ -124,7 +124,6 @@ function people(){
 	
 	frame.add(foot,foot2,ffoot,ffoot2,body,head,hand,hand2,texture);
 }
-
 function animate(){
 	if (turn)angle += 0.01;
 	frame.position.set(35*Math.cos(angle),0,-35*Math.sin(angle));
@@ -132,8 +131,6 @@ function animate(){
 	renderer.render (scene,camera);
 	requestAnimationFrame(animate);
 }
-
-	
 </script>
 </body>
 </html>
